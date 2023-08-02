@@ -1,8 +1,10 @@
-# Running containers.
+# Discontinued/Archived activity
 
-## Sample instructions
+## Running containers.
 
-### Individually run containers.
+### Sample instructions
+
+#### Individually run containers.
 
 `client-direct` (which `Dockerfile` `EXPOSE`s to container port `4200`):
 
@@ -24,7 +26,7 @@
  1. Indirect (i.e. via intermediary data repository) comms.  
     `docker run -it -p 8080:8080 -e REST_API_URL_DATA='http://127.0.0.1:8118/' --rm app-manager:0.0.10`
 
-### Docker `compose`d containers:
+#### Docker `compose`d containers:
 
  1. As a grouped container (`client-direct` and `app-manager` only).  
     See [docker-compose-minimum.yml](docker-compose/docker-compose-minimum.yml).
@@ -32,7 +34,7 @@
  1. As a grouped container (`client-direct`, `app-manager`, `datastore` and `mongodb`).  
     See [docker-compose-all.yml](docker-compose/docker-compose-all.yml).
 
-### Full orchestration:
+#### Full orchestration:
 
  1. As an orchestrated docker "swarm" deployment.  
     See [docker-compose-swarm.yml](o11n/swarm/docker-compose-swarm.yml).
@@ -40,14 +42,14 @@
  1. As an orchestrated kubernetes deployment.  
     See [kubernetes configs](o11n/k8s/).
 
-## General `buildah` commands.
+### General `buildah` commands.
 
 `container=$(buildah from docker.io/cardiacmodelling/ap-nimbus-client-direct:0.0.6)`  
 `buildah run $container cat /usr/src/app/src/env.js` # Check content.  
 `buildah copy $container env.js /usr/src/app/src/env.js` # Modify running container.  
 `buildah commit --format docker $container ap-nimbus-client-direct:0.0.6` # Save modified container.
 
-## General `docker` commands.
+### General `docker` commands.
 
 `docker image list`  
 `docker container list`
@@ -59,7 +61,7 @@
 If you want to run `strace` (if installed in image)..  
 `docker run --security-opt seccomp:unconfined -it <image id> /bin/bash` 
 
-## Documentation and developer tools.
+### Documentation and developer tools.
 `npm run compodoc` # See `package.json` for full command  
 `ng test --code-coverage`
 
